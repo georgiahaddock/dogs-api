@@ -49,4 +49,12 @@ describe('Endpoints', () => {
             expect(deletedDog).toBeNull();
         })
     })
+
+    describe('GET /dogs', () =>{
+        it('should get the correct requested dog from the db', async () =>{
+            const response = await request(app).get(/dogs/1);
+            const dog1 = Dog.findByPk(1);
+            expect(response).toBe(expect.objectContaining(dog1));
+        })
+    })
 });
