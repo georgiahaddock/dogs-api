@@ -42,7 +42,7 @@ describe('Endpoints', () => {
         })
     })
 
-    describe('DELETE /dogs', () => {
+    describe('DELETE /dogs/:id', () => {
         it('should be that deleted dog is not left in the db after deletion', async () =>{
             await request(app).delete('/dogs/1');
             const deletedDog = await Dog.findByPk(1);
@@ -50,11 +50,11 @@ describe('Endpoints', () => {
         })
     })
 
-    describe('GET /dogs', () =>{
+    describe('GET /dogs/:id', () =>{
         it('should get the correct requested dog from the db', async () =>{
-            const response = await request(app).get(/dogs/1);
+            const response = await request(app).get('/dogs/1');
             const dog1 = Dog.findByPk(1);
-            expect(response).toBe(expect.objectContaining(dog1));
+            expect(response.body).toEqual(expect.objectContaining(dog1));
         })
     })
 });

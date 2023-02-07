@@ -43,7 +43,7 @@ app.get('/dogs', async (req, res, next) => {
         };
       }
     }
-        
+
     const dogs = await Dog.findAll({
       where
     });
@@ -52,5 +52,18 @@ app.get('/dogs', async (req, res, next) => {
     next(error)
   }
 });
+
+app.get('/dogs/:id', async (req, res, next) => {
+  try{
+    const dog = Dog.findByPk(req.params.id);
+    if(dog){
+      res.send(dog);
+    }else{
+      res.send("no dog found!")
+    }
+  }catch(err){
+    next(err);
+  }
+})
 
 module.exports = app;
