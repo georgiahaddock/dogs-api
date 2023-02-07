@@ -33,4 +33,16 @@ describe('Endpoints', () => {
             expect(response.body[0]).toEqual(expect.objectContaining(dogs[0]));
         });
     });
+
+    describe('POST /dogs', () =>{
+
+        it('should return the posted dog data in response body', async () => {
+            const response = await request(app).post('/dogs').send(testDogData);
+            expect(response.body).toEqual(expect.objectContaining(testDogData));
+        })
+    })
+
+    describe('DELETE /dogs', () => {
+        it('should be that no dogs are left in the db after deletion', () =>{})
+    })
 });
