@@ -43,6 +43,10 @@ describe('Endpoints', () => {
     })
 
     describe('DELETE /dogs', () => {
-        it('should be that no dogs are left in the db after deletion', () =>{})
+        it('should be that deleted dog is not left in the db after deletion', async () =>{
+            await request(app).delete('/dogs/1');
+            const deletedDog = await Dog.findByPk(1);
+            expect(deletedDog).toBeNull();
+        })
     })
 });
